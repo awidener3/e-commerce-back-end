@@ -28,6 +28,7 @@ To delete an item, use one of the endpoints above, attach an `id` parameter, and
 
 ## 🔍 Preview
 
+https://user-images.githubusercontent.com/70721378/152903353-3b5b744b-36f5-4543-8180-71300a559f9b.mp4
 
 ## User Story
 
