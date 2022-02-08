@@ -1,7 +1,7 @@
 # 📝 Homework #13: E-Commerce Backend
 
 ## 🎥 Video Walkthrough
-[Video Walkthrough](./images/ecommerce-preview.mp4)
+[Video Walkthrough](https://drive.google.com/file/d/1df6KZZ3jBe4SIdB50Lbh3vgoCOfGx_D4/view?usp=sharing)
 
 ## 🔨 Task
 Given starter code, I created the back-end of an e-commerce application so that products can be stored on a database which are then connected to categories and tags. The product, category and tags have CRUD methods attached so that the database is highly customizabe and can be easily expanded. This was achieved using Express.js and Sequelize to connect with a MySQL database.
