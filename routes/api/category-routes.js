@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
+const { update } = require('../../models/Product');
 
-// The `/api/categories` endpoint
-// * tested and complete
+// /api/categories
 
-// * find all categories (including associated products)
+// Get all categories + associated products
 router.get('/', async (req, res) => {
 	try {
 		const categoryData = await Category.findAll({
@@ -16,19 +16,25 @@ router.get('/', async (req, res) => {
 	}
 });
 
-// * find one category by its `id` value (including associated products)
+// Get one category by id + associated products
 router.get('/:id', async (req, res) => {
 	try {
 		const categoryData = await Category.findByPk(req.params.id, {
 			include: { model: Product },
 		});
+
+		if (!categoryData) {
+			res.status(404).json({ message: 'No category found with that ID' });
+			return;
+		}
+
 		res.status(200).json(categoryData);
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
 
-// * create a new category
+// Create new category
 router.post('/', async (req, res) => {
 	try {
 		const newCategory = await Category.create(req.body);
@@ -38,7 +44,7 @@ router.post('/', async (req, res) => {
 	}
 });
 
-// * update a category by its `id` value
+// Update category by id
 router.put('/:id', async (req, res) => {
 	try {
 		let updatedCategory = await Category.update(
@@ -49,13 +55,19 @@ router.put('/:id', async (req, res) => {
 				},
 			}
 		);
+
+		if (!updatedCategory) {
+			res.status(404).json({ message: 'No category found with that ID' });
+			return;
+		}
+
 		res.status(200).json(updatedCategory);
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
 
-// * delete a category by its `id` value
+// Delete category by id
 router.delete('/:id', async (req, res) => {
 	try {
 		let deletedCategory = await Category.destroy({
@@ -63,6 +75,12 @@ router.delete('/:id', async (req, res) => {
 				id: req.params.id,
 			},
 		});
+
+		if (!deletedCategory) {
+			res.status(404).json({ message: 'No category found with that ID' });
+			return;
+		}
+
 		res.status(200).json(deletedCategory);
 	} catch (err) {
 		res.status(500).json(err);
